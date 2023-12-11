@@ -18,7 +18,7 @@ typedef float f32;
 typedef double f64;
 
 typedef int b32;
-typedef _Bool b8;
+typedef char b8;
 
 #if defined(__clang__) || defined(__GNUC)
 	#define static_assert _Static_assert
@@ -45,13 +45,13 @@ static_assert(sizeof(u64) == 8, "expected u64 to be 8 bytes!");
 
 #ifdef EXPORT
 	#ifdef _MSC_VER
-		#define api _declspec(dllexport)
+		#define api __declspec(dllexport)
 	#else
 		#define api __attribute__((visibility("default")))
 	#endif
 #else
 	#ifdef _MSC_VER
-		#define api __declscpe(dllimport)
+		#define api __declspec(dllimport)
 	#else
 		#define api
 	#endif
