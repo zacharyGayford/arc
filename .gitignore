@@ -1,0 +1,6 @@
+bin/
+obj/
+*.spv
+*compile_flags.txt
+
+notes.txt
