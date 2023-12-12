@@ -7,6 +7,9 @@
 
 #include <stdlib.h>
 
+#include "defines.h"
+#include "core/logger.h"
+
 typedef struct {
 	HINSTANCE instanceHandle;
 	HWND windowHandle;
@@ -46,6 +49,7 @@ b8 platform_create(
 	windowClass.lpszClassName = windowClassName;
 
 	if (!RegisterClassA(&windowClass)) {
+		log_error("window registration failed!");
 		MessageBoxA(null, "window registration failed!", "error", MB_ICONEXCLAMATION | MB_OK);
 		return false;
 	}
@@ -94,6 +98,7 @@ b8 platform_create(
 		0);
 
 	if (windowHandle == null) {
+		log_error("window registration failed!");
 		MessageBoxA(null, "window registration failed!", "error", MB_ICONEXCLAMATION | MB_OK);
 		return false;
 	}
