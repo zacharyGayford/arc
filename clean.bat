@@ -1,4 +1,4 @@
 @echo off
-rem cleans the bin director
+rem clears the bin directory
 rmdir /s /q bin
 mkdir bin
