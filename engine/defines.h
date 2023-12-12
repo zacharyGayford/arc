@@ -17,8 +17,10 @@ typedef signed long long i64;
 typedef float f32;
 typedef double f64;
 
-typedef int b32;
 typedef char b8;
+typedef int b32;
+
+typedef unsigned char byte;
 
 #if defined(__clang__) || defined(__GNUC)
 	#define static_assert _Static_assert
@@ -40,8 +42,10 @@ static_assert(sizeof(u64) == 8, "expected u64 to be 8 bytes!");
 #define false 0
 #define null 0
 
+/*
 #define internal static
 #define global static
+*/
 
 #ifdef EXPORT
 	#ifdef _MSC_VER
@@ -89,29 +93,28 @@ static_assert(sizeof(u64) == 8, "expected u64 to be 8 bytes!");
 //
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
-	#define WINDOWS 1
+	#define PLATFORM_WINDOWS 1
 	#ifndef _WIN64
 		#error "system is not 64 bit!"
 	#endif
 #elif defined(__linux__) || defined(__gnu_linux)
-	#define LINUX 1
+	#define PLATFORM_LINUX 1
 	#if defined(__ANDROID__)
-		#define ANDROID 1
+		#define PLATFORM_ANDROID 1
 	#endif
 #elif defined(__unix__)
-	#define UNIX 1
+	#define PLATFORM_UNIX 1
 #elif defined(_POSIX_VERSION)
-	#define POSIX 1
+	#define PLATFORM_POSIX 1
 #elif __APPLE__
 	#define APPLE 1
 	#include <TargetConditionals.h>
-	#if TARGET_IPHONE_SIMULATOR 1
-		#define IOS_SIMULATOR 1
+	#if TARGET_OS_MAC
+		#define PLATFORM_MAC 1
 	#elif TARGET_OS_IPHONE
-		#define IOS 1
-		#define IOS 1
-	#elif TARGET_OS_MAC
-		#define MAC 1
+		#define PLATFORM_IOS 1
+	#elif TARGET_IPHONE_SIMULATOR 1
+		#define PLATFORM_IOS_SIMULATOR 1
 	#else
 		#error "unsupported apple platform!"
 	#endif
