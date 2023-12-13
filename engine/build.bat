@@ -19,3 +19,4 @@ set defines=-DDEBUG -DEXPORT -D_CRT_SECURE_NO_WARNINGS
 echo building...
 set outputPath=../bin/%output%.dll
 clang %sources% %compilerFlags% -o %outputPath% %defines% %includeFlags% %linkerFlags%
+if not %ERRORLEVEL%==1 exit /b 1
